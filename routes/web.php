@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\CategoryController;
+// use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,6 +28,7 @@ Route::view('/admin','admin.admin-master');
 Auth::routes();
 Route::post('/user/logout', [LoginController::class, 'userLogout'])->name('user.logout');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::resource('/test', TestController::class);
 
 
 // for admin
@@ -38,7 +41,16 @@ Route::group(['prefix' => 'admin'], function(){
     Route::group(['middleware' => 'admin.auth'], function(){
         Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
         Route::get('/logout', [AdminController::class, 'logout'])->name('admin.logout');
+        
+        // admin category page
+        // Route::get('/category',[CategoryController::class, 'index'])->name('list.category');
+        // Route::get('/category/create', [CategoryController::class, 'create'])->name('create.category');
+        // Route::post('/category/store', [CategoryController::class, 'store'])->name('store.category');
+        // Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('edit.category');
+        // Route::get('/category/delete', [CategoryController::class, 'destroy'])->name('delete.category');
+        Route::resource('/category', CategoryController::class);
     });
+
 });
 
 
