@@ -44,6 +44,12 @@
                 </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link collapsed" href="{{ route('tag.index') }}">
+                  <i class="fas fa-tags"></i>
+                  Tag
+              </a>
+          </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
                     aria-expanded="true" aria-controls="collapseForm">
                     <i class="fab fa-fw fa-wpforms"></i>
@@ -312,6 +318,7 @@
                 @yield('admin-dashboard')
                 {{-- @yield('admin-category-content') --}}
                 @yield('admin-category')
+                @yield('admin-tag')
                 {{-- @yield('admin-update-category') --}}
 
                 <!-- Modal Logout -->
@@ -369,7 +376,8 @@
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         
-        @include('admin.alert-message')
+        @include('message.alert')
+        {{-- @include('message.tag-alert') --}}
 </body>
 
 </html>

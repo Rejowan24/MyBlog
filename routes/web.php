@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\TagController;
 // use App\Http\Controllers\TestController;
 
 /*
@@ -48,7 +49,12 @@ Route::group(['prefix' => 'admin'], function(){
         // Route::post('/category/store', [CategoryController::class, 'store'])->name('store.category');
         // Route::get('/category/edit/{id}', [CategoryController::class, 'edit'])->name('edit.category');
         // Route::get('/category/delete', [CategoryController::class, 'destroy'])->name('delete.category');
+        
+        // admin category page.
         Route::resource('/category', CategoryController::class);
+        
+        // admin tag page.
+        Route::resource('/tag', TagController::class);
     });
 
 });
