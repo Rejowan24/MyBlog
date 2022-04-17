@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\PostController;
 // use App\Http\Controllers\TestController;
 
 /*
@@ -55,6 +56,9 @@ Route::group(['prefix' => 'admin'], function(){
         
         // admin tag page.
         Route::resource('/tag', TagController::class);
+
+        // admin post page.
+        Route::resource('/post', PostController::class);
     });
 
 });

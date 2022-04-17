@@ -1,5 +1,5 @@
 @extends('admin.admin-master')
-@section('admin-dashboard')
+@section('admin-content')
             <!-- Container Fluid-->
         <div class="container-fluid" id="container-wrapper">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">

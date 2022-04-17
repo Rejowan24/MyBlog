@@ -1,5 +1,5 @@
 @extends('admin.admin-master')
-@section('admin-category')
+@section('admin-content')
     <div class="container-fluid" id="container-wrapper">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Category</h1>
@@ -36,31 +36,39 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($categories->count())
+                                    @foreach ($categories as $category)
+                                        <tr>
+                                            <td>{{ $category->id }}</td>
+                                            <td>{{ $category->name }}</td>
+                                            <td>{{ $category->slug }}</td>
+                                            <td>post count</td>
+                                            <td>{{ $category->description }}</td>
+                                            <td class="d-flex">
+                                                <a href="{{ route('category.edit', [$category->id]) }}"
+                                                    class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
+                                                {{-- <a href="{{ route('category.destroy',[$category->id]) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a> --}}
+                                                <form action="{{ route('category.destroy', [$category->id]) }}"
+                                                    class="mr-1" method="POST">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <button class="btn btn-sm btn-danger"><i
+                                                            class="fas fa-trash"></i></button>
+                                                </form>
+                                                <a href="" class="btn btn-sm btn-success mr-1"><i
+                                                        class="fas fa-eye"></i></a>
+                                            </td>
 
-                                @foreach ($categories as $category)
+                                        </tr>
+                                    @endforeach
+                                @else
                                     <tr>
-                                        <td>{{ $category->id }}</td>
-                                        <td>{{ $category->name }}</td>
-                                        <td>{{ $category->slug }}</td>
-                                        <td>post count</td>
-                                        <td>{{ $category->description }}</td>
-                                        <td class="d-flex">
-                                            <a href="{{ route('category.edit', [$category->id]) }}"
-                                                class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
-                                            {{-- <a href="{{ route('category.destroy',[$category->id]) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a> --}}
-                                            <form action="{{ route('category.destroy', [$category->id]) }}"
-                                                class="mr-1" method="POST">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-sm btn-danger"><i
-                                                        class="fas fa-trash"></i></button>
-                                            </form>
-                                            <a href="" class="btn btn-sm btn-success mr-1"><i
-                                                    class="fas fa-eye"></i></a>
+                                        <td colspan="6">
+                                            <h5 class="text-center">No Categories Found.</h5>
                                         </td>
-
                                     </tr>
-                                @endforeach
+                                @endif
+
                             </tbody>
                         </table>
                     </div>
@@ -78,7 +86,7 @@
                               </li>
                             </ul>
                           </nav> --}}
-                          {{ $categories->links() }}
+                        {{ $categories->links() }}
                     </div>
                 </div>
             </div>

@@ -2,10 +2,10 @@
 @section('admin-content')
     <div class="container-fluid" id="container-wrapper">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Tag</h1>
+            <h1 class="h3 mb-0 text-gray-800">Post</h1>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="text-black-50" href="./">Home</a></li>
-                <li class="breadcrumb-item text-primary"><a href="{{ route('tag.index') }}">Tag List</a></li>
+                <li class="breadcrumb-item text-primary"><a href="{{ route('post.index') }}">Post List</a></li>
                 {{-- <li class="breadcrumb-item active" aria-current="page">Simple Tables</li> --}}
             </ol>
         </div>
@@ -15,8 +15,8 @@
                 <!-- Simple Tables -->
                 <div class="card">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">tag</h6>
-                        <a href="{{ route('tag.create') }}" class="btn btn-primary">Create</a>
+                        <h6 class="m-0 font-weight-bold text-primary">Post</h6>
+                        <a href="{{ route('post.create') }}" class="btn btn-primary">Create</a>
                     </div>
                     <div class="table-responsive">
                         {{-- @if (Session::has('delete'))
@@ -28,28 +28,34 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Image</th>
+                                    <th>Title</th>
                                     <th>Slug</th>
-                                    <th>Post Count</th>
-                                    <th>Description</th>
+                                    {{-- <th>Post Count</th> --}}
+                                    <th>Category</th>
+                                    <th>Author</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @if ($tags->count())
-                                    @foreach ($tags as $tag)
+                                @if ($posts->count())
+                                    @foreach ($posts as $post)
                                         <tr>
-                                            <td>{{ $tag->id }}</td>
-                                            <td>{{ $tag->name }}</td>
-                                            <td>{{ $tag->slug }}</td>
-                                            <td>post count</td>
-                                            <td>{{ $tag->description }}</td>
+                                            <td>{{ $post->id }}</td>
+                                            <td><img src="{{ asset('storage/post/'.$post->image) }}" alt=""
+                                                    class="image-fluid"
+                                                    style="max-width: 80px; max-height:80px;"></td>
+                                            <td>{{ $post->title }}</td>
+                                            <td>{{ $post->slug }}</td>
+                                            {{-- <td>post count</td> --}}
+                                            <td>{{ $post->category->name }}</td>
+                                            <td>{{ $post->user->name }}</td>
                                             <td class="d-flex">
-                                                <a href="{{ route('tag.edit', [$tag->id]) }}"
+                                                <a href="{{ route('post.edit', [$post->id]) }}"
                                                     class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
-                                                {{-- <a href="{{ route('tag.destroy',[$tag->id]) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a> --}}
-                                                <form action="{{ route('tag.destroy', [$tag->id]) }}"
+                                                {{-- <a href="{{ route('post.destroy',[$tag->id]) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a> --}}
+                                                <form action="{{ route('post.destroy', [$post->id]) }}"
                                                     class="mr-1" method="POST">
                                                     @method('DELETE')
                                                     @csrf
@@ -65,7 +71,7 @@
                                 @else
                                     <tr>
                                         <td colspan="6">
-                                            <h5 class="text-center">No Tags Found.</h5>
+                                            <h5 class="text-center">No Posts Found.</h5>
                                         </td>
                                     </tr>
                                 @endif
@@ -86,7 +92,7 @@
                               </li>
                             </ul>
                           </nav> --}}
-                        {{ $tags->links() }}
+                        {{ $posts->links() }}
                     </div>
                 </div>
             </div>

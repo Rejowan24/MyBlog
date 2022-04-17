@@ -39,16 +39,22 @@
             </div>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="{{ route('category.index') }}">
-                    <i class="fas fa-tags"></i>
+                    <i class="fas fa-list-alt"></i>
                     Category
                 </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link collapsed" href="{{ route('tag.index') }}">
-                  <i class="fas fa-tags"></i>
-                  Tag
-              </a>
-          </li>
+                <a class="nav-link collapsed" href="{{ route('tag.index') }}">
+                    <i class="fas fa-tags"></i>
+                    Tag
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="{{ route('post.index') }}">
+                    <i class="far fa-clone"></i>
+                    Post
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseForm"
                     aria-expanded="true" aria-controls="collapseForm">
@@ -315,11 +321,7 @@
                 </nav>
                 <!-- Topbar -->
 
-                @yield('admin-dashboard')
-                {{-- @yield('admin-category-content') --}}
-                @yield('admin-category')
-                @yield('admin-tag')
-                {{-- @yield('admin-update-category') --}}
+                @yield('admin-content')
 
                 <!-- Modal Logout -->
                 <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
@@ -371,13 +373,35 @@
     <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('backend/js/ruang-admin.min.js') }}"></script>
+    <script src="{{ asset('backend/js/bs-custom-file-input.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
         integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        
-        @include('message.alert')
-        {{-- @include('message.tag-alert') --}}
+
+    @include('message.alert')
+
+    {{-- for image --}}
+    <script>
+        $(document).ready(function() {
+            bsCustomFileInput.init()
+        })
+    </script>
+    <script>
+        function previewFile(input){
+            var file = $("input[type=file]").get(0).files[0];
+     
+            if(file){
+                var reader = new FileReader();
+     
+                reader.onload = function(){
+                    $("#previewImg").attr("src", reader.result);
+                }
+     
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
 </body>
 
 </html>
