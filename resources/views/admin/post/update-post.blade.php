@@ -7,7 +7,8 @@
                 <li class="breadcrumb-item"><a class="text-black-50" href="./">Home</a></li>
                 <li class="breadcrumb-item "><a class="text-black-50" href="{{ route('post.index') }}">Post List</a>
                 </li>
-                <li class="breadcrumb-item "><a class="text-black-50" href="{{ route('post.create') }}">Create Post</a></li>
+                <li class="breadcrumb-item "><a class="text-black-50" href="{{ route('post.create') }}">Create Post</a>
+                </li>
                 <li class="breadcrumb-item text-primary"><a href="#">Update Post</a></li>
                 {{-- <li class="breadcrumb-item active" aria-current="page">Simple Tables</li> --}}
             </ol>
@@ -33,42 +34,66 @@
                         {{ Session::get('updated') }}
                     </div>
                 @endif --}}
-                <form action="{{ route('post.update', [$post->id]) }}" method="POST" enctype="multipart/form-data">
-                    @method('PUT')
-                    @csrf
-                    <div class="form-group">
-                        <label for="name">Title</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" name="title"
-                            placeholder="Enter Your Name" value="{{ $post->title }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleFormControlSelect1">Post Category</label>
-                        <select class="form-control" id="exampleFormControlSelect1" name="category">
-                            <option selected disabled>Select Category</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}" @if ($post->category_id == $category->id) selected @endif>
-                                    {{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
 
-                    <div class="form-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="image" id="customFile" value="{{ $post->image }}"
-                                onchange="previewFile(this)">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
-                            <img id="previewImg" src="{{ asset('storage/post/'.$post->image) }}" alt="" style="max-width: 100px; margin-top:20px; margin-bottom:20px; overflow:hidden;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 offset-lg-2">
+                            <form action="{{ route('post.update', [$post->id]) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+                                <div class="form-group">
+                                    <label for="name">Title</label>
+                                    <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
+                                        name="title" placeholder="Enter Your Name" value="{{ $post->title }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Post Category</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="category">
+                                        <option selected disabled>Select Category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}"
+                                                @if ($post->category_id == $category->id) selected @endif>
+                                                {{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="image" id="customFile"
+                                            value="{{ $post->image }}" onchange="previewFile(this)">
+                                        <label class="custom-file-label" for="customFile">Choose file</label>
+                                        <img id="previewImg" src="{{ asset('storage/post/' . $post->image) }}" alt=""
+                                            style="max-width: 100px; margin-top:20px; margin-bottom:25px; overflow:hidden;">
+                                    </div>
+                                </div>
+                                <div class="form-group d-flex flex-wrap">
+                                    @foreach ($tags as $tag)
+                                        <div class="form-check" style="margin-right: 20px;">
+                                            <input class="form-check-input" name="tags[]" type="checkbox"
+                                                value="{{ $tag->id }}" id="tag{{ $tag->id }}"
+                                                @foreach ($post->tags as $pt) @if ($tag->id == $pt->id)
+                                                    checked
+                                                @endif @endforeach>
+                                            <label class="form-check-label" for="tag{{ $tag->id }}">
+                                                {{ $tag->name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    {{-- <input type="text" class="form-control" id="description" placeholder="Password"> --}}
+                                    <textarea class="form-control" id="description" name="description"
+                                        placeholder="description here">{{ $post->description }}</textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </form>
                         </div>
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        {{-- <input type="text" class="form-control" id="description" placeholder="Password"> --}}
-                        <textarea class="form-control" id="description" name="description"
-                            placeholder="description here">{{ $post->description }}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </form>
             </div>
         </div>
 

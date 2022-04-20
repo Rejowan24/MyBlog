@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use Str;
 use Session;
 use Carbon\Carbon;
+use App\Models\Tag;
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -31,8 +32,9 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags = Tag::all();
         $categories = Category::all();
-        return view('admin.post.create-post', compact('categories'));
+        return view('admin.post.create-post', compact(['categories','tags']));
     }
 
     /**
@@ -60,6 +62,8 @@ class PostController extends Controller
             'published_at' => Carbon::now(),
         ]);
 
+        $post->tags()->attach($request->tags);
+
         if($request->has('image')){
             $image = $request->image;
             $image_rename = time().'.'.$image->getClientOriginalExtension();
@@ -80,7 +84,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        $tags = Tag::all();
+        return view('admin.post.show', compact(['post','tags']));
     }
 
     /**
@@ -92,7 +97,8 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         $categories = Category::all();
-        return view('admin.post.update-post',compact('post','categories'));
+        $tags = Tag::all();
+        return view('admin.post.update-post',compact(['post','categories','tags']));
     }
 
     /**
@@ -123,6 +129,8 @@ class PostController extends Controller
         if(file_exists(public_path('storage/post/'.$post->image))){
             unlink(public_path('storage/post/'.$post->image));
         }
+
+        $post->tags()->sync($request->tags);
 
         $image = $request->image;
         $image_rename = time().'.'.$image->getClientOriginalExtension();
