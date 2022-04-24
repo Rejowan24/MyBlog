@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
@@ -49,7 +50,7 @@ class TagController extends Controller
             'description' => $request->description,
         ]);
 
-        Session::flash('success','Tag has been added successfull');
+        Alert::success('Success', 'Tag has been added successfull');
         return redirect()->back();
     }
 
@@ -93,7 +94,7 @@ class TagController extends Controller
       $tag->description = $request->description;
       $tag->save();
 
-        Session::flash('updated','Tag has been updated successfull');
+      Alert::info('Updated', 'Your Tag has been updated successfull');
         return redirect()->back();
     }
 
@@ -107,7 +108,7 @@ class TagController extends Controller
     {
         if($tag){
             $tag->delete();
-            Session::flash('delete','Tag has been deleted successfull');
+            Alert::warning('deleting', 'Your tag has been deleted successfull');
             return redirect()->route('tag.index'); 
         }
     }

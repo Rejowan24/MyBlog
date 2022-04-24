@@ -28,11 +28,6 @@
                         </ul>
                     </div>
                 @endif
-                {{-- @if (Session::has('updated'))
-                    <div class="alert alert-success">
-                        {{ Session::get('updated') }}
-                    </div>
-                @endif --}}
                 <form action="{{ route('tag.update',[$tag->id]) }}" method="POST">
                     @method('PUT')
                     @csrf

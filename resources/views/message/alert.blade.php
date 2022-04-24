@@ -1,13 +1,45 @@
-@if (Session::has('success'))
-    <script>
-        toastr.success("{!! Session::get('success') !!}")
-    </script>
-@elseif (Session::has('updated'))
-    <script>
-        toastr.success("{!! Session::get('updated') !!}")
-    </script>
-@elseif (Session::has('delete'))
-    <script>
-        toastr.success("{!! Session::get('delete') !!}")
-    </script>
-@endif
+<script>
+    function deletePost(id) {
+        const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-success',
+    cancelButton: 'btn btn-danger'
+  },
+  buttonsStyling: false
+})
+
+swalWithBootstrapButtons.fire({
+  title: 'Are you sure?',
+  text: "You won't be able to revert this!",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonText: 'Yes, delete it!',
+  cancelButtonText: 'No, cancel!',
+  reverseButtons: true
+}).then((result) => {
+  if (result.isConfirmed) {
+
+    event.preventDefault();
+    document.getElementById('form-delete-'+id).submit();
+    // swalWithBootstrapButtons.fire(
+    //   'Deleted!',
+    //   'Your file has been deleted.',
+    //   'success'
+    // )
+
+
+  } else if (
+    /* Read more about handling dismissals below */
+    result.dismiss === Swal.DismissReason.cancel
+  ) {
+    swalWithBootstrapButtons.fire(
+      'Cancelled',
+      'Your file is safe :)',
+      'error'
+    )
+  }
+})
+    }
+</script>
+
+

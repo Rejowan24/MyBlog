@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+use RealRashid\SweetAlert\Facades\Alert;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -52,7 +53,7 @@ class CategoryController extends Controller
             'description' => $request->description,
         ]);
 
-        Session::flash('success','Category has been added successfull');
+        Alert::success('Success', 'Category has been added successfull');
         return redirect()->back();
     }
 
@@ -96,7 +97,8 @@ class CategoryController extends Controller
       $category->description = $request->description;
       $category->save();
 
-        Session::flash('updated','Category has been updated successfull');
+      Alert::info('Updated', 'Your Category has been updated successfull');
+
         return redirect()->back();
     }
 
@@ -110,7 +112,7 @@ class CategoryController extends Controller
     {
         if($category){
             $category->delete();
-            Session::flash('delete','Category has been deleted successfull');
+            Alert::warning('deleting', 'Your category file has been deleted successfull');
             return redirect()->route('category.index'); 
         }
     }

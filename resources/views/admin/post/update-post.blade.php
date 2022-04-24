@@ -29,12 +29,6 @@
                         </ul>
                     </div>
                 @endif
-                {{-- @if (Session::has('updated'))
-                    <div class="alert alert-success">
-                        {{ Session::get('updated') }}
-                    </div>
-                @endif --}}
-
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
@@ -96,6 +90,9 @@
 
             </div>
         </div>
-
     </div>
+@endsection
+@section('editor')
+<link rel="stylesheet" href="{{ asset('backend/editor/summernote-bs4.min.css') }}">
+<script src="{{ asset('backend/editor/summernote-bs4.min.js') }}"></script>
 @endsection

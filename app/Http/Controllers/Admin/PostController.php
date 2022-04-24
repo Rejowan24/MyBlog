@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\admin;
-
+use RealRashid\SweetAlert\Facades\Alert;
 use Str;
 use Session;
 use Carbon\Carbon;
@@ -72,7 +72,7 @@ class PostController extends Controller
             $post->save();
         }
 
-        Session::flash('success','Post has been added successfull');
+        Alert::success('Success', 'Post has been added successfull');
         return redirect()->route('post.index');
     }
 
@@ -137,8 +137,7 @@ class PostController extends Controller
         $image->storeAs('post', $image_rename);
         $post->image = $image_rename;
         $post->update();
-
-        Session::flash('updated','Post has been updated successfull');
+        Alert::info('Updated', 'Your Post has been updated successfull');
         return redirect()->route('post.index');
     }
 
@@ -156,9 +155,9 @@ class PostController extends Controller
             }
 
             $post->delete();
-            Session::flash('delete','Post has been deleted');
+            Alert::warning('deleting', 'Your file has been deleted successfull');
             return redirect()->route('post.index');
         }
-
+      
     }
 }

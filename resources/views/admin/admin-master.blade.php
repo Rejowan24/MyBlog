@@ -12,9 +12,9 @@
     <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/css/ruang-admin.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
-        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
 </head>
 
 <body id="page-top">
@@ -369,17 +369,16 @@
     </a>
 
     <script src="{{ asset('backend/vendor/jquery/jquery.min.js') }}"></script>
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> --}}
     <script src="{{ asset('backend/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('backend/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <script src="{{ asset('backend/js/ruang-admin.min.js') }}"></script>
-    <script src="{{ asset('backend/js/bs-custom-file-input.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
-        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ asset('backend/js/bs-custom-file-input.min.js.map') }}"></script>
+    <script src="{{ asset('backend/js/sweetalert2.min.js') }}"></script>
+
+
 
     @include('message.alert')
+    @include('sweetalert::alert')
 
     {{-- for image --}}
     <script>
@@ -388,20 +387,28 @@
         })
     </script>
     <script>
-        function previewFile(input){
+        function previewFile(input) {
             var file = $("input[type=file]").get(0).files[0];
-     
-            if(file){
+
+            if (file) {
                 var reader = new FileReader();
-     
-                reader.onload = function(){
+
+                reader.onload = function() {
                     $("#previewImg").attr("src", reader.result);
                 }
-     
+
                 reader.readAsDataURL(file);
             }
         }
     </script>
+    @yield('editor')
+    <script>
+        $('#description').summernote({
+          placeholder: 'Write down some description here.',
+          tabsize: 2,
+          height: 100
+        });
+      </script>
 </body>
 
 </html>

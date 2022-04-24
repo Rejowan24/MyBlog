@@ -19,11 +19,6 @@
                         <a href="{{ route('tag.create') }}" class="btn btn-primary">Create</a>
                     </div>
                     <div class="table-responsive">
-                        {{-- @if (Session::has('delete'))
-                            <div class="alert alert-danger">
-                                {{ Session::get('delete') }}
-                            </div>
-                        @endif --}}
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
@@ -48,13 +43,12 @@
                                             <td class="d-flex">
                                                 <a href="{{ route('tag.edit', [$tag->id]) }}"
                                                     class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
-                                                {{-- <a href="{{ route('tag.destroy',[$tag->id]) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a> --}}
-                                                <form action="{{ route('tag.destroy', [$tag->id]) }}"
-                                                    class="mr-1" method="POST">
-                                                    @method('DELETE')
+                                                    <button class="btn btn-sm btn-danger"   onclick="deletePost({{ $tag->id }})"><i
+                                                        class="fas fa-trash"></i></button>
+                                                <form id="form-delete-{{ $tag->id }}" action="{{ route('tag.destroy',$tag->id) }}"
+                                                    class="mr-1" method="POST" style="display: none;">
                                                     @csrf
-                                                    <button class="btn btn-sm btn-danger"><i
-                                                            class="fas fa-trash"></i></button>
+                                                    @method('DELETE')
                                                 </form>
                                                 <a href="" class="btn btn-sm btn-success mr-1"><i
                                                         class="fas fa-eye"></i></a>

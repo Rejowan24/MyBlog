@@ -28,19 +28,6 @@
                         </ul>
                     </div>
                 @endif
-                {{-- @if (Session::has('success'))
-                    <div class="alert alert-success">
-                        {{ Session::get('success') }}
-                    </div>
-                @endif --}}
-                {{-- <script>
-                    @if (Session::has('success'))
-                        Toastify({ text: "{{ Session::get('success') }}", duration: 3000,
-                        style: { background: "linear-gradient(to right, #00b09b, #96c93d)" }
-                        }).showToast();
-                    @endif
-                </script> --}}
-
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 offset-lg-2">
@@ -94,7 +81,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-
+        </div>  
     </div>
+@endsection
+@section('editor')
+<link rel="stylesheet" href="{{ asset('backend/editor/summernote-bs4.min.css') }}">
+<script src="{{ asset('backend/editor/summernote-bs4.min.js') }}"></script>
 @endsection

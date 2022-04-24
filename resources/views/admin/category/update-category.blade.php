@@ -28,11 +28,6 @@
                         </ul>
                     </div>
                 @endif
-                {{-- @if (Session::has('updated'))
-                    <div class="alert alert-success">
-                        {{ Session::get('updated') }}
-                    </div>
-                @endif --}}
                 <form action="{{ route('category.update',[$category->id]) }}" method="POST">
                     @method('PUT')
                     @csrf
@@ -43,7 +38,6 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        {{-- <input type="text" class="form-control" id="description" placeholder="Password"> --}}
                         <textarea class="form-control" id="description" name="description" >{{ $category->description }}</textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>

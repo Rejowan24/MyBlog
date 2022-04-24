@@ -19,11 +19,6 @@
                         <a href="{{ route('post.create') }}" class="btn btn-primary">Create</a>
                     </div>
                     <div class="table-responsive">
-                        {{-- @if (Session::has('delete'))
-                            <div class="alert alert-danger">
-                                {{ Session::get('delete') }}
-                            </div>
-                        @endif --}}
                         <table class="table align-items-center table-flush">
                             <thead class="thead-light">
                                 <tr>
@@ -44,9 +39,8 @@
                                     @foreach ($posts as $post)
                                         <tr>
                                             <td>{{ $post->id }}</td>
-                                            <td><img src="{{ asset('storage/post/'.$post->image) }}" alt=""
-                                                    class="image-fluid"
-                                                    style="max-width: 80px; max-height:80px;"></td>
+                                            <td><img src="{{ asset('storage/post/' . $post->image) }}" alt=""
+                                                    class="image-fluid" style="max-width: 80px; max-height:80px;"></td>
                                             <td>{{ $post->title }}</td>
                                             <td>{{ $post->slug }}</td>
                                             {{-- <td>post count</td> --}}
@@ -58,17 +52,18 @@
                                             </td>
                                             <td>{{ $post->user->name }}</td>
                                             <td class="d-flex">
-                                                <a href="{{ route('post.show',[$post->id]) }}" class="btn btn-sm btn-success mr-1"><i
-                                                    class="fas fa-eye"></i></a>
+                                                <a href="{{ route('post.show', [$post->id]) }}"
+                                                    class="btn btn-sm btn-success mr-1"><i class="fas fa-eye"></i></a>
                                                 <a href="{{ route('post.edit', [$post->id]) }}"
                                                     class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
-                                                {{-- <a href="{{ route('post.destroy',[$tag->id]) }}" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a> --}}
-                                                <form action="{{ route('post.destroy', [$post->id]) }}"
-                                                    class="mr-1" method="POST">
-                                                    @method('DELETE')
+                                                <button class="btn btn-sm btn-danger"
+                                                    onclick="deletePost({{ $post->id }})" type="submit"><i
+                                                        class="fas fa-trash"></i></button>
+                                                <form id="form-delete-{{ $post->id }}"
+                                                    action="{{ route('post.destroy', $post->id) }}" class="mr-1"
+                                                    method="POST" style="display: none;">
                                                     @csrf
-                                                    <button class="btn btn-sm btn-danger"><i
-                                                            class="fas fa-trash"></i></button>
+                                                    @method('DELETE')
                                                 </form>
                                             </td>
 

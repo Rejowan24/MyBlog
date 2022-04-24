@@ -28,19 +28,6 @@
                         </ul>
                     </div>
                 @endif
-                {{-- @if (Session::has('success'))
-                    <div class="alert alert-success">
-                        {{ Session::get('success') }}
-                    </div>
-                @endif --}}
-                {{-- <script>
-                    @if (Session::has('success'))
-                        Toastify({ text: "{{ Session::get('success') }}", duration: 3000,
-                        style: { background: "linear-gradient(to right, #00b09b, #96c93d)" }
-                        }).showToast();
-                    @endif
-                </script> --}}
-
                 <form action="{{ route('category.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -50,7 +37,6 @@
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
-                        {{-- <input type="text" class="form-control" id="description" placeholder="Password"> --}}
                         <textarea class="form-control" id="description" name="description" placeholder="description here"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
