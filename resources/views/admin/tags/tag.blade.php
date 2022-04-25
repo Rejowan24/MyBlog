@@ -41,6 +41,8 @@
                                             <td>post count</td>
                                             <td>{{ $tag->description }}</td>
                                             <td class="d-flex">
+                                                <a href="" class="btn btn-sm btn-success mr-1"><i
+                                                    class="fas fa-eye"></i></a>
                                                 <a href="{{ route('tag.edit', [$tag->id]) }}"
                                                     class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
                                                     <button class="btn btn-sm btn-danger"   onclick="deletePost({{ $tag->id }})"><i
@@ -50,8 +52,6 @@
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                                <a href="" class="btn btn-sm btn-success mr-1"><i
-                                                        class="fas fa-eye"></i></a>
                                             </td>
 
                                         </tr>

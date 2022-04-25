@@ -40,6 +40,8 @@
                                             <td>post count</td>
                                             <td>{{ $category->description }}</td>
                                             <td class="d-flex">
+                                                <a href="" class="btn btn-sm btn-success mr-1"><i
+                                                    class="fas fa-eye"></i></a>
                                                 <a href="{{ route('category.edit', [$category->id]) }}"
                                                     class="btn btn-sm btn-primary mr-1"><i class="fas fa-edit"></i></a>
                                                     <button class="btn btn-sm btn-danger" onclick="deletePost({{ $category->id }})" ><i
@@ -49,8 +51,6 @@
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
-                                                <a href="" class="btn btn-sm btn-success mr-1"><i
-                                                        class="fas fa-eye"></i></a>
                                             </td>
 
                                         </tr>
